@@ -11,6 +11,7 @@
     <modules>
         <module>ad-eureka</module>
         <module>ad-gateway</module>
+        <module>caogen-ad-service</module>
     </modules>
 
     <name>caogen-ad-spring-cloud</name>
