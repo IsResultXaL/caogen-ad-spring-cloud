@@ -61,4 +61,13 @@ public class AdUnitOPController {
         return adUnitService.createUnitDistrict(request);
     }
 
+    @PostMapping("/create/creativeUnit")
+    public CreativeUnitResponse createCreativeUnit(
+            @RequestBody CreativeUnitRequest request
+    ) throws AdException {
+        log.info("ad-sponsor: createCreativeUnit -> {}",
+                JSON.toJSONString(request));
+        return adUnitService.createCreativeUnit(request);
+    }
+
 }

@@ -3,14 +3,17 @@ package com.caogen.ad.service.impl;
 import com.caogen.ad.constant.Constants;
 import com.caogen.ad.dao.AdPlanRepository;
 import com.caogen.ad.dao.AdUnitRepository;
+import com.caogen.ad.dao.CreativeRepository;
 import com.caogen.ad.dao.unit_condition.AdUnitDistrictRepository;
 import com.caogen.ad.dao.unit_condition.AdUnitItRepository;
 import com.caogen.ad.dao.unit_condition.AdUnitKeywordRepository;
+import com.caogen.ad.dao.unit_condition.CreativeUnitRepository;
 import com.caogen.ad.entity.AdPlan;
 import com.caogen.ad.entity.AdUnit;
 import com.caogen.ad.entity.unit_condition.AdUnitDistrict;
 import com.caogen.ad.entity.unit_condition.AdUnitIt;
 import com.caogen.ad.entity.unit_condition.AdUnitKeyword;
+import com.caogen.ad.entity.unit_condition.CreativeUnit;
 import com.caogen.ad.exception.AdException;
 import com.caogen.ad.service.AdUnitService;
 import com.caogen.ad.vo.*;
@@ -42,17 +45,25 @@ public class AdUnitServiceImpl implements AdUnitService {
 
     private final AdUnitDistrictRepository unitDistrictRepository;
 
+    private final CreativeRepository creativeRepository;
+
+    private final CreativeUnitRepository creativeUnitRepository;
+
     @Autowired
     public AdUnitServiceImpl(AdPlanRepository planRepository,
                              AdUnitRepository unitRepository,
                              AdUnitKeywordRepository unitKeywordRepository,
                              AdUnitItRepository unitItRepository,
-                             AdUnitDistrictRepository unitDistrictRepository) {
+                             AdUnitDistrictRepository unitDistrictRepository,
+                             CreativeRepository creativeRepository,
+                             CreativeUnitRepository creativeUnitRepository) {
         this.planRepository = planRepository;
         this.unitRepository = unitRepository;
         this.unitKeywordRepository = unitKeywordRepository;
         this.unitItRepository = unitItRepository;
         this.unitDistrictRepository = unitDistrictRepository;
+        this.creativeRepository = creativeRepository;
+        this.creativeUnitRepository = creativeUnitRepository;
     }
 
     @Override
@@ -162,5 +173,42 @@ public class AdUnitServiceImpl implements AdUnitService {
         return new AdUnitDistrictResponse(ids);
     }
 
+    @Override
+    public CreativeUnitResponse createCreativeUnit(
+            CreativeUnitRequest request) throws AdException {
+
+        List<Long> unitIds = request.getUnitItems().stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getUnitId)
+                .collect(Collectors.toList());
+        List<Long> creativeIds = request.getUnitItems().stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getCreativeId)
+                .collect(Collectors.toList());
+
+        if (!(isRelatedUnitExist(unitIds) && isRelatedCreativeExist(creativeIds))) {
+            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        List<CreativeUnit> creativeUnits = new ArrayList<>();
+        request.getUnitItems().forEach(i -> creativeUnits.add(
+                new CreativeUnit(i.getCreativeId(), i.getUnitId())
+        ));
+
+        List<Long> ids = creativeUnitRepository.saveAll(creativeUnits)
+                .stream()
+                .map(CreativeUnit::getId)
+                .collect(Collectors.toList());
+
+        return new CreativeUnitResponse(ids);
+    }
+
+    private boolean isRelatedCreativeExist(List<Long> creativeIds) {
+
+        if (CollectionUtils.isEmpty(creativeIds)) {
+            return false;
+        }
+
+        return creativeRepository.findAllById(creativeIds).size() ==
+                new HashSet<>(creativeIds).size();
+    }
 
 }
