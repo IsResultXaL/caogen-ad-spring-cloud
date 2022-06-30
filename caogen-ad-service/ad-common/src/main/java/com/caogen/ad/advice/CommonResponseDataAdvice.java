@@ -19,18 +19,21 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 public class CommonResponseDataAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
+        // 如果当前方法所在的类标识了 IgnoreResponseAdvice 注解, 则不需要处理
         if (methodParameter.getDeclaringClass().isAnnotationPresent(
                 IgnoreResponseAdvice.class
         )) {
             return false;
         }
 
+        // 如果当前方法标识了 IgnoreResponseAdvice 注解, 则不需要处理
         if (methodParameter.getMethod().isAnnotationPresent(
                 IgnoreResponseAdvice.class
         )) {
             return false;
         }
 
+        // 对响应进行处理, 执行 beforeBodyWrite 方法
         return true;
     }
 
