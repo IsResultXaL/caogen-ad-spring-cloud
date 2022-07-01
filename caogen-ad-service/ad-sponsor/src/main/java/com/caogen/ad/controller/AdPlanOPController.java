@@ -1,6 +1,7 @@
 package com.caogen.ad.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.caogen.ad.annotation.IgnoreResponseAdvice;
 import com.caogen.ad.entity.AdPlan;
 import com.caogen.ad.exception.AdException;
 import com.caogen.ad.service.AdPlanService;
@@ -36,6 +37,7 @@ public class AdPlanOPController {
         return adPlanService.createAdPlan(request);
     }
 
+    @IgnoreResponseAdvice
     @PostMapping("/get/adPlan")
     public List<AdPlan> getAdPlanByIds(
             @RequestBody AdPlanGetRequest request) throws AdException {
