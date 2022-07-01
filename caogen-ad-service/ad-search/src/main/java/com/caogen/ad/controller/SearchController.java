@@ -2,6 +2,7 @@ package com.caogen.ad.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.caogen.ad.annotation.IgnoreResponseAdvice;
+import com.caogen.ad.client.SponsorClient;
 import com.caogen.ad.client.vo.AdPlan;
 import com.caogen.ad.client.vo.AdPlanGetRequest;
 import com.caogen.ad.vo.CommonResponse;
@@ -25,9 +26,13 @@ public class SearchController {
 
     private final RestTemplate restTemplate;
 
+    private final SponsorClient sponsorClient;
+
     @Autowired
-    public SearchController(RestTemplate restTemplate) {
+    public SearchController(RestTemplate restTemplate,
+                            SponsorClient sponsorClient) {
         this.restTemplate = restTemplate;
+        this.sponsorClient = sponsorClient;
     }
 
     @IgnoreResponseAdvice
@@ -41,6 +46,15 @@ public class SearchController {
                 request,
                 List.class
         ).getBody();
+    }
+
+    @IgnoreResponseAdvice
+    @PostMapping("/getAdPlansByFeign")
+    public List<AdPlan> getAdPlansByFeign(
+            @RequestBody AdPlanGetRequest request) {
+        log.info("ad-search: getAdPlansByFeign -> {}",
+                JSON.toJSONString(request));
+        return sponsorClient.getAdPlans(request);
     }
 
 }
