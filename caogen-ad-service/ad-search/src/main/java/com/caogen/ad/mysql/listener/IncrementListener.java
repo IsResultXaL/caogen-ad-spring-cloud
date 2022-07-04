@@ -26,8 +26,8 @@ import java.util.Map;
 @Component
 public class IncrementListener implements Ilistener {
 
-    /*@Resource(name = "")
-    private Sender sender;*/
+    @Resource(name = "indexSender")
+    private Sender sender;
 
     private final AggregationListener aggregationListener;
 
@@ -77,6 +77,6 @@ public class IncrementListener implements Ilistener {
             rowData.getFieldValueMap().add(_afterMap);
         }
 
-        //sender.sender(rowData);
+        sender.sender(rowData);
     }
 }
