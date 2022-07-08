@@ -46,7 +46,7 @@ public class SearchController {
     @PostMapping("/getAdPlansByRibbon")
     public List<AdPlan> getAdPlansByRibbon(
             @RequestBody AdPlanGetRequest request) {
-        log.info("ad-search: getAdPlansByRebbon -> {}",
+        log.info("ad-search: getAdPlansByRibbon -> {}",
                 JSON.toJSONString(request));
         return restTemplate.postForEntity(
                 "http://eureka-client-ad-sponsor/ad-sponsor/get/adPlan",

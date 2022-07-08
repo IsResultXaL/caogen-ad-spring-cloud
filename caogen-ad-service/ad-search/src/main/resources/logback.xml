@@ -3,9 +3,9 @@
 
     <appender name="system"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./logs/ad-search.log</file>
+        <file>/Users/kcaogen/logs/caogen-ad/ad-search.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./logs/ad-search.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>/Users/kcaogen/logs/caogen-ad/ad-search.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>5</maxHistory>
         </rollingPolicy>
         <encoder>
