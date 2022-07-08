@@ -15,7 +15,7 @@ import com.caogen.ad.index.creativeunit.CreativeUnitObject;
 import com.caogen.ad.index.district.UnitDistrictIndex;
 import com.caogen.ad.index.interest.UnitItIndex;
 import com.caogen.ad.index.keyword.UnitKeywordIndex;
-import com.caogen.ad.mysql.constant.OpType;
+import com.caogen.ad.constant.OpType;
 import com.caogen.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 

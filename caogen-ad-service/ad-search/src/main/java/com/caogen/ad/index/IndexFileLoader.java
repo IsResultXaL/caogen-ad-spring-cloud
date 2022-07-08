@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.caogen.ad.dump.DConstant;
 import com.caogen.ad.dump.table.*;
 import com.caogen.ad.handler.AdLevelDataHandler;
-import com.caogen.ad.mysql.constant.OpType;
+import com.caogen.ad.constant.OpType;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 

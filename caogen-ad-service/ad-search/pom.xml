@@ -76,6 +76,12 @@
             <artifactId>ad-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- ad-binlog-common 通用模块 -->
+        <dependency>
+            <groupId>com.caogen.ad</groupId>
+            <artifactId>ad-binlog-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- apache 提供的一些工具类 -->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -87,12 +93,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.0</version>
-        </dependency>
-        <!-- binlog 监听与解析: https://github.com/shyiko/mysql-binlog-connector-java -->
-        <dependency>
-            <groupId>com.github.shyiko</groupId>
-            <artifactId>mysql-binlog-connector-java</artifactId>
-            <version>0.21.0</version>
         </dependency>
         <!-- 解析配置文件中的配置 -->
         <dependency>

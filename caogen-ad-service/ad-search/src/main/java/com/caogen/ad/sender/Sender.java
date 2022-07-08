@@ -1,6 +1,6 @@
 package com.caogen.ad.sender;
 
-import com.caogen.ad.mysql.dto.MySqlRowData;
+import com.caogen.ad.dto.MySqlRowData;
 
 /**
  * @Author 康良玉

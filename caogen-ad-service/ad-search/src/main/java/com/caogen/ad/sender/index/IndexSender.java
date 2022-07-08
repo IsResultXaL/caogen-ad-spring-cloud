@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.caogen.ad.dump.table.*;
 import com.caogen.ad.handler.AdLevelDataHandler;
 import com.caogen.ad.index.DataLevel;
-import com.caogen.ad.mysql.constant.Constant;
-import com.caogen.ad.mysql.dto.MySqlRowData;
+import com.caogen.ad.constant.Constant;
+import com.caogen.ad.dto.MySqlRowData;
 import com.caogen.ad.sender.Sender;
 import com.caogen.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @Create 2022-07-04 15:07
  */
 @Slf4j
-@Component("indexSender")
+@Component
 public class IndexSender implements Sender {
     @Override
     public void sender(MySqlRowData rowData) {
